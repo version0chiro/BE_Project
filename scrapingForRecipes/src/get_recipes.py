@@ -10,7 +10,7 @@ from os import path
 import argparse
 from multiprocessing import Pool, cpu_count
 
-import config
+from . import config
 sys.path.append(config.path_scrapers)
 
 HEADERS = {
