@@ -2,10 +2,10 @@ from os import path, makedirs
 
 path_src = path.dirname(path.abspath(__file__))
 path_base = path.dirname(path_src)
-path_data = path.join(path_base,'data')
-path_img = path.join(path_base,'img')
-path_scrapper = path.join(path_base,'recipe-scrapper')
-path_outputs = path.join(path_base,'outputs')
+path_data = path.join(path_base, 'data')
+path_img = path.join(path_base, 'img')
+path_scrapers = path.join(path_base, 'recipe-scrapper')
+path_outputs = path.join(path_base, 'outputs')
 
 if not path.exists(path_outputs):
     makedirs(path_outputs)

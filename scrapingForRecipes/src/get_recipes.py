@@ -1,4 +1,4 @@
-from recipe_scrapers import scrap_me
+from recipe_scrapers import scrape_me
 import json
 import time
 from urllib import request
@@ -10,7 +10,7 @@ from os import path
 import argparse
 from multiprocessing import Pool, cpu_count
 
-from . import config
+import config
 sys.path.append(config.path_scrapers)
 
 HEADERS = {
@@ -20,7 +20,7 @@ HEADERS = {
 
 def get_recipe(url):
     try:
-        scrap = scrap_me(url)
+        scrap = scrape_me(url)
     except:
         print('Could not scrape URL {}'.format(url))
         return {}
