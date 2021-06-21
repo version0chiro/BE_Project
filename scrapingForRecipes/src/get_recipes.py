@@ -1,3 +1,76 @@
+from recipe_scrapers import scrap_me
+import json
+import time
+from urllib import request
+from urllib.error import HTTPError, URLError
+from bs4 import BeautifulSoup
+
+import sys
+from os import path
+import argparse
+from multiprocessing import Pool, cpu_count
+
+import config
+sys.path.append(config.path_scrapers)
+
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
+}
+
+
+def get_recipe(url):
+    try:
+        scrap = scrap_me(url)
+    except:
+        print('Could not scrape URL {}'.format(url))
+        return {}
+
+    try:
+        title = scrap.title()
+    except AttributeError:
+        title = None
+
+    try:
+        ingredients = scrap.ingredients()
+    except AttributeError:
+        ingredients = None
+
+    try:
+        instructions = scrap.instructions()
+    except AttributeError:
+        instructions = None
+
+    try:
+        picture_link = scrap.picture()
+    except AttributeError:
+        picture_link = None
+
+    return {
+        'title': title,
+        'ingredients': ingredients,
+        'instructions': instructions,
+        'picture_link': picture_link,
+    }
+
+
+def get_all_recipes_fn(page_str, page_num):
+    base_url = 'http://www.foodnetwork.com'
+    search_url_str = 'recipes/a-z'
+    url = '{}/{}/{}/p/{}'.format(base_url, search_url_str, page_str, page_num)
+
+    try:
+        soup = BeautifulSoup(request.urlopen(
+            request.Request(url, headers=HEADERS)).read(), "html.parser")
+        recipe_link_items = soup.select(
+            'div.o-Capsule__m-Body ul.m-PromoList li a')
+        recipe_links = [r.attrs['href']for r in recipe_link_items]
+        print('Read {} recipe links from {}'.format(len(recipe_links), url))
+        return recipe_links
+    except (HTTPError, URLError):
+        print('Could not parse page {}'.format(url))
+        return []
+
+
 def get_all_recipes_ar(page_num):
     base_url = 'http://allrecipes.com'
     search_url_str = 'recipes/?page'
