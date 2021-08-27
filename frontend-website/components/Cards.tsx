@@ -1,5 +1,6 @@
 import { Card, Button } from "react-bootstrap";
 import { useState } from "react";
+// const  image_finder  =  require("image-search-engine")
 
 type RecipeProps = {
   recipe: string | null;
@@ -28,17 +29,24 @@ const Cards: React.FC<RecipeProps> = (props) => {
 
   return (
     <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="https://picsum.photos/200/300" />
+      <Card.Img variant="top" src="https://picsum.photos/200/" />
       <Card.Body>
         <Card.Title>{recipeTitle}</Card.Title>
         <Card.Text>
           {typeof recipeIngred !== "undefined" && recipeIngred
-            ? recipeIngred.split(";").map((ingred) => <li>{ingred}</li>)
+            ? recipeIngred
+                .split(";")
+                .map((ingred, i) => <li key={i}>{ingred}</li>)
             : null}
         </Card.Text>
         <br />
         <Card.Text>{recipeInstructions}</Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Button
+          variant="primary"
+          href={"https://www.google.com/search?q=" + recipeTitle + "recipe"}
+        >
+          Go somewhere
+        </Button>
       </Card.Body>
     </Card>
   );
