@@ -26,22 +26,15 @@ const Cards: React.FC<RecipeProps> = (props) => {
     }
   }
 
-  //   const formatString = (recipe: string | null) => {
-  //     if (recipe === null) return;
-  //     setRecipeTitle(tempArr[0]);
-  //     setRecipeIngred(tempArr[1]);
-  //     setRecipeInstructions(tempArr[2]);
-  //   };
-
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" src="https://picsum.photos/200/300" />
       <Card.Body>
         <Card.Title>{recipeTitle}</Card.Title>
         <Card.Text>
-          { recipeIngred.split(";").map((ingred) => (
-            <li>{ingred}</li>
-          ))}
+          {typeof recipeIngred !== "undefined" && recipeIngred
+            ? recipeIngred.split(";").map((ingred) => <li>{ingred}</li>)
+            : null}
         </Card.Text>
         <br />
         <Card.Text>{recipeInstructions}</Card.Text>
