@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify, make_response
 from sklearn.feature_extraction.text import TfidfVectorizer
 from functools import reduce
 from operator import add
@@ -50,13 +50,17 @@ def overall_scores(query_vector):
 
 def print_recipes(index, query, recipe_range):
     '''Prints recipes according to query similary ranks'''
+    ans = ""
     print('Search Query: {}\n'.format(query))
     for i, index in enumerate(index, recipe_range[0]):
+        ans += 'Recipe Rank: {}\t'.format(
+            i+1) + str(recipes.loc[index, 'title']) + '\n' + str(recipes.loc[index, 'ingredient_text']) + ' \n ' + str(recipes.loc[index, 'instructions'])+" --|||||-- "
         print('Recipe Rank: {}\t'.format(i+1),
               recipes.loc[index, 'title'], '\n')
         print('Ingredients:\n{}\n '.format(
             recipes.loc[index, 'ingredient_text']))
         print('Instructions:\n{}\n'.format(recipes.loc[index, 'instructions']))
+    return ans
 
 
 def Search_Recipes(query, query_ranked=False, recipe_range=(0, 5)):
@@ -94,8 +98,11 @@ w_categories = .5
 @app.route('/<items>')
 def home(items):
     query = items.split('&&')
-    Search_Recipes(query, query_ranked=True, recipe_range=(0, 3))
-    return "Home"
+    return make_response(jsonify({
+        "ans": str(Search_Recipes(query, query_ranked=True, recipe_range=(0, 3)))
+    }), 200)
+
+    # return "Home"
 
 
 if __name__ == '__main__':
