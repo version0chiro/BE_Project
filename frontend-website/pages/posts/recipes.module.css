@@ -1,0 +1,14 @@
+.card_set {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.title_set{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

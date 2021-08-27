@@ -13,3 +13,6 @@ if not path.exists(path_data):
     makedirs(path_data)
 if not path.exists(path_img):
     makedirs(path_img)
+
+
+# MONGODB_URI=mongodb+srv://Pooja:12345@cluster0.ciluf.mongodb.net/BEProject?retryWrites=true&w=majority
