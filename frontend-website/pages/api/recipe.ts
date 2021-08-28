@@ -18,7 +18,7 @@ export default async function handler(
   );
   let myArray = ans.split("|---|||||---|");
   // console.log(myArray);
-  console.log(myArray[0]);
+  // console.log(myArray[0]);
 
   res.send(myArray);
 }

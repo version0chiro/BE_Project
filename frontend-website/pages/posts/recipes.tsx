@@ -12,8 +12,8 @@ const RecipeForm = () => {
   return (
     <div>
       <div className={styles.title_set}>
-        <h1>Recipe Form</h1>
-        <p>This is a recipe form.</p>
+        <h1>Recipe Recommendation System Prototype</h1>
+        
         <Form
           onSubmit={(e) => {
             e.preventDefault();
@@ -36,14 +36,19 @@ const RecipeForm = () => {
         >
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Enter Ingredients Seperated with Spaces</Form.Label>
+            <div>
+
             <Form.Control
               name="ingredients"
               type="text"
               placeholder="Enter Ingredients"
-            />
+              required
+              className={styles.search}
+              />
+              </div>
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className={styles.buttonSearch}>
             Submit
           </Button>
         </Form>
