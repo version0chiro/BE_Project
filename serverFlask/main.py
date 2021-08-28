@@ -9,12 +9,12 @@ import spacy
 import json
 
 app = Flask(__name__)
-series = pd.read_csv('../recipeRecomendation/tokenized_text.csv',
+series = pd.read_csv('./tokenized_text.csv',
                      header=None, index_col=0, squeeze=True)
 tokenized_text = series.to_list()
 tokenized_text.pop(0)
 
-recipes = pd.read_csv('../recipeRecomendation/tagged_recipes_df.csv')
+recipes = pd.read_csv('./tagged_recipes_df.csv')
 recipes = recipes.drop(['Unnamed: 0'], axis=1)
 
 
@@ -54,7 +54,8 @@ def print_recipes(index, query, recipe_range):
     ans = ""
     print('Search Query: {}\n'.format(query))
     for i, index in enumerate(index, recipe_range[0]):
-        ans += str(recipes.loc[index, 'title']) + ' ^^^^ \n' + str(recipes.loc[index, 'ingredient_text']) + '^^^^ \n ' + str(recipes.loc[index, 'instructions'])+" |---|||||---| "
+        ans += str(recipes.loc[index, 'title']) + ' ^^^^ \n' + str(recipes.loc[index, 'ingredient_text']
+                                                                   ) + '^^^^ \n ' + str(recipes.loc[index, 'instructions'])+" |---|||||---| "
         print('Recipe Rank: {}\t'.format(i+1),
               recipes.loc[index, 'title'], '\n')
         print('Ingredients:\n{}\n '.format(

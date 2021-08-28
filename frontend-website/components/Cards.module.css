@@ -1,0 +1,8 @@
+.recipe_card {
+  padding: 10px;
+  margin: 10px;
+}
+
+.recipe_card:hover {
+  background-color: #f5f5f5;
+}
