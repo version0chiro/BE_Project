@@ -17,7 +17,6 @@ const RecipeForm = () => {
         <Form
           onSubmit={(e) => {
             e.preventDefault();
-            console.log(e.target.ingredients.value);
             let ingred = e.target.ingredients.value;
             let ingred_arr = ingred.replaceAll(" ", "&&");
 
@@ -29,7 +28,6 @@ const RecipeForm = () => {
             fetch("/api/recipe", requestOptions)
               .then((response) => response.json())
               .then((json) => {
-                console.log(json);
                 setRecipe1(json[0]);
                 setRecipe2(json[1]);
                 setRecipe3(json[2]);
