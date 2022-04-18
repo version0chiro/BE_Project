@@ -55,6 +55,7 @@ def print_recipes(index, query, recipe_range):
     print('Search Query: {}\n'.format(query))
     for i, index in enumerate(index, recipe_range[0]):
         ans += str(recipes.loc[index, 'title']) + ' ^^^^ \n' + str(recipes.loc[index, 'ingredient_text']
+                                                                   
                                                                    ) + '^^^^ \n ' + str(recipes.loc[index, 'instructions'])+" |---|||||---| "
         print('Recipe Rank: {}\t'.format(i+1),
               recipes.loc[index, 'title'], '\n')

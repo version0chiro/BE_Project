@@ -13,7 +13,7 @@ const RecipeForm = () => {
     <div>
       <div className={styles.title_set}>
         <h1>Recipe Recommendation System Prototype</h1>
-        
+
         <Form
           onSubmit={(e) => {
             e.preventDefault();
@@ -31,33 +31,40 @@ const RecipeForm = () => {
                 setRecipe1(json[0]);
                 setRecipe2(json[1]);
                 setRecipe3(json[2]);
+
+                console.log(json);
               });
           }}
         >
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Enter Ingredients Seperated with Spaces</Form.Label>
             <div>
-
-            <Form.Control
-              name="ingredients"
-              type="text"
-              placeholder="Enter Ingredients"
-              required
-              className={styles.search}
+              <Form.Control
+                name="ingredients"
+                type="text"
+                placeholder="Enter Ingredients"
+                required
+                className={styles.search}
               />
-              </div>
+            </div>
           </Form.Group>
 
-          <Button variant="primary" type="submit" className={styles.buttonSearch}>
+          <Button
+            variant="primary"
+            type="submit"
+            className={styles.buttonSearch}
+          >
             Submit
           </Button>
         </Form>
       </div>
-      <div className={styles.card_set}>
-        <Cards recipe={recipe1 ? recipe1 : "Recipe will come here"} />
-        <Cards recipe={recipe2 ? recipe2 : "Recipe will come here"} />
-        <Cards recipe={recipe3 ? recipe3 : "Recipe will come here"} />
-      </div>
+      {1 && (
+        <div className={styles.card_set}>
+          <Cards recipe={recipe1 ? recipe1 : "Recipe will come here"} />
+          <Cards recipe={recipe2 ? recipe2 : "Recipe will come here"} />
+          <Cards recipe={recipe3 ? recipe3 : "Recipe will come here"} />
+        </div>
+      )}
     </div>
   );
 };
